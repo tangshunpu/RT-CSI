@@ -36,17 +36,15 @@ frequency is **3.5 GHz**, as recorded in each file's `config` metadata.
 
 ### Shenzhen few-shot sets
 
-| Total train + val links | Train / val | UE-disjoint train / val |
-|---:|---:|---:|
-| [200](data/csi_SHENZHEN_train200_3GHz_32x1024.npz) | 160 / 40 | [155 / 39](data/csi_SHENZHEN_train200_3GHz_32x1024_disjoint.npz) |
-| [400](data/csi_SHENZHEN_train400_3GHz_32x1024.npz) | 320 / 80 | [313 / 78](data/csi_SHENZHEN_train400_3GHz_32x1024_disjoint.npz) |
-| [800](data/csi_SHENZHEN_train800_3GHz_32x1024.npz) | 640 / 160 | [626 / 155](data/csi_SHENZHEN_train800_3GHz_32x1024_disjoint.npz) |
-| [1,600](data/csi_SHENZHEN_train1600_3GHz_32x1024.npz) | 1,280 / 320 | [1,245 / 313](data/csi_SHENZHEN_train1600_3GHz_32x1024_disjoint.npz) |
-| [3,200](data/csi_SHENZHEN_train3200_3GHz_32x1024.npz) | 2,560 / 640 | [2,496 / 625](data/csi_SHENZHEN_train3200_3GHz_32x1024_disjoint.npz) |
-| [6,400](data/csi_SHENZHEN_train6400_3GHz_32x1024.npz) | 5,120 / 1,280 | [5,004 / 1,252](data/csi_SHENZHEN_train6400_3GHz_32x1024_disjoint.npz) |
-| [12,800](data/csi_SHENZHEN_train12800_3GHz_32x1024.npz) | 10,240 / 2,560 | [10,016 / 2,504](data/csi_SHENZHEN_train12800_3GHz_32x1024_disjoint.npz) |
-
-Fixed Shenzhen test set: [40,000 links](data/csi_SHENZHEN_test_3GHz_32x1024.npz).
+| Original total | Original train / val | Revised version total | Revised train / val |
+|---:|---:|---:|---:|
+| [200](data/csi_SHENZHEN_train200_3GHz_32x1024.npz) | 160 / 40 | [194](data/csi_SHENZHEN_train200_3GHz_32x1024_disjoint.npz) | 155 / 39 |
+| [400](data/csi_SHENZHEN_train400_3GHz_32x1024.npz) | 320 / 80 | [391](data/csi_SHENZHEN_train400_3GHz_32x1024_disjoint.npz) | 313 / 78 |
+| [800](data/csi_SHENZHEN_train800_3GHz_32x1024.npz) | 640 / 160 | [781](data/csi_SHENZHEN_train800_3GHz_32x1024_disjoint.npz) | 626 / 155 |
+| [1,600](data/csi_SHENZHEN_train1600_3GHz_32x1024.npz) | 1,280 / 320 | [1,558](data/csi_SHENZHEN_train1600_3GHz_32x1024_disjoint.npz) | 1,245 / 313 |
+| [3,200](data/csi_SHENZHEN_train3200_3GHz_32x1024.npz) | 2,560 / 640 | [3,121](data/csi_SHENZHEN_train3200_3GHz_32x1024_disjoint.npz) | 2,496 / 625 |
+| [6,400](data/csi_SHENZHEN_train6400_3GHz_32x1024.npz) | 5,120 / 1,280 | [6,256](data/csi_SHENZHEN_train6400_3GHz_32x1024_disjoint.npz) | 5,004 / 1,252 |
+| [12,800](data/csi_SHENZHEN_train12800_3GHz_32x1024.npz) | 10,240 / 2,560 | [12,520](data/csi_SHENZHEN_train12800_3GHz_32x1024_disjoint.npz) | 10,016 / 2,504 |
 
 ### Channel and propagation settings
 
@@ -145,7 +143,7 @@ evaluation use **all 40,000** rows of
 
 For Shenzhen adaptation, load `x_train` and `x_val` from one of the linked
 few-shot archives above, then load `x_test` from the separate fixed test
-archive. Details on the original and corrected splits are in
+archive. Details on the original and revised versions are in
 [`docs/release-audit.md`](docs/release-audit.md).
 
 ```python
