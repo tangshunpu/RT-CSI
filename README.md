@@ -24,7 +24,7 @@ OpenStreetMap data; see [attribution](#license-and-attribution).*
 | ZJU | OSM/Blosm campus; Mix5 | 5 | 300 m | 24,000 | 8,000 | 8,000 |
 | SUTD | OSM/Blosm campus; Mix5 | 5 | 300 m | 24,000 | 8,000 | 8,000 |
 | **Mix5 combined** | Concatenation of the five rows above | — | — | **120,000** | **40,000** | **40,000** |
-| **Shenzhen Futian CBD** | OSM/Blosm; held-out test with separate few-shot adaptation sets | 10 | 400 m | See below | See below | **40,000** |
+| **Shenzhen Futian CBD** | OSM/Blosm; held-out test with separate few-shot adaptation sets | 10 | 400 m | 160–10,240 | 40–2,560 | **40,000** |
 
 Each count is a **channel sample**. Mix5 keeps one serving-BS link per UE.
 Shenzhen stores every valid UE-BS link, so one UE position can appear in
@@ -34,13 +34,9 @@ convenience copy of the five scene files; it adds no new channels.
 The filenames say `3GHz` for historical compatibility. The actual carrier
 frequency is **3.5 GHz**, as recorded in each file's `config` metadata.
 
-### Shenzhen few-shot training sets
+### Shenzhen few-shot sets
 
-The training sets **are included** in [`data/`](data/). Each `trainN` filename
-uses `N` for the total train-plus-validation **UE-BS link** budget, split
-80/20 in the original files; it does not mean `x_train` alone has `N` rows.
-
-| Nominal links | Original `x_train` / `x_val` | UE-disjoint alternative `x_train` / `x_val` |
+| Total train + val links | Train / val | UE-disjoint train / val |
 |---:|---:|---:|
 | [200](data/csi_SHENZHEN_train200_3GHz_32x1024.npz) | 160 / 40 | [155 / 39](data/csi_SHENZHEN_train200_3GHz_32x1024_disjoint.npz) |
 | [400](data/csi_SHENZHEN_train400_3GHz_32x1024.npz) | 320 / 80 | [313 / 78](data/csi_SHENZHEN_train400_3GHz_32x1024_disjoint.npz) |
@@ -50,12 +46,7 @@ uses `N` for the total train-plus-validation **UE-BS link** budget, split
 | [6,400](data/csi_SHENZHEN_train6400_3GHz_32x1024.npz) | 5,120 / 1,280 | [5,004 / 1,252](data/csi_SHENZHEN_train6400_3GHz_32x1024_disjoint.npz) |
 | [12,800](data/csi_SHENZHEN_train12800_3GHz_32x1024.npz) | 10,240 / 2,560 | [10,016 / 2,504](data/csi_SHENZHEN_train12800_3GHz_32x1024_disjoint.npz) |
 
-The original files preserve the paper-experiment splits. The `_disjoint`
-alternatives remove links whose UE location appears in the fixed test set and
-split train/validation by UE location; their smaller counts require fresh
-evaluation. All these training archives have an empty `x_test`. The fixed
-40,000-link test set is the separate
-[`csi_SHENZHEN_test_3GHz_32x1024.npz`](data/csi_SHENZHEN_test_3GHz_32x1024.npz).
+Fixed Shenzhen test set: [40,000 links](data/csi_SHENZHEN_test_3GHz_32x1024.npz).
 
 ### Channel and propagation settings
 
