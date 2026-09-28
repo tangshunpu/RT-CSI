@@ -12,6 +12,7 @@ COMMANDS = {
     "inspect": "inspect",
     "disjoint-fewshot": "fewshot",
     "plot-scenes": "plot_scenes",
+    "plot-results": "plot_results",
 }
 
 
@@ -25,7 +26,8 @@ def main() -> None:
               "  combine           Build the Mix5 NPZ from five scene files\n"
               "  inspect           Show NPZ arrays and metadata\n"
               "  disjoint-fewshot  Create UE-disjoint Shenzhen adaptation sets\n"
-              "  plot-scenes       Plot CSI examples from all six scenes\n\n"
+              "  plot-scenes       Plot CSI examples from all six scenes\n"
+              "  plot-results      Plot Mix5 NMSE results from the manuscript table\n\n"
               "Run 'rt-csi <command> --help' for command options.")
         return
     command = argv[0]

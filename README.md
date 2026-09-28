@@ -90,6 +90,20 @@ The dB values are relative to each sample's own peak, so colors do not compare
 absolute received power across scenes. Regenerate the figure with
 `uv run rt-csi plot-scenes`.*
 
+## Reported Mix5 feedback results
+
+The manuscript reports the following per-scene test NMSE after training each
+method on the five-scene Mix5 training set. The bars show **−NMSE**, so a taller
+bar corresponds to a lower (better) NMSE in dB. A dark outline marks the best
+method for each scene and compression ratio.
+
+![Grouped bar chart of six methods across five Mix5 scenes at compression ratios 1/4, 1/8, and 1/16.](assets/mix5_nmse_bars.png)
+
+*Values were transcribed from the manuscript table into
+[`docs/mix5-nmse.csv`](docs/mix5-nmse.csv); they are reported results, not
+new evaluations run by this repository. Regenerate the chart with
+`uv run rt-csi plot-results`.*
+
 ## Use the data
 
 Reading an NPZ only requires NumPy:
@@ -139,6 +153,7 @@ uv run rt-csi generate --scene SHENZHEN_test --out regenerated/shenzhen_test.npz
 uv run rt-csi generate --scene SHENZHEN_train --target-samples 3200 --out regenerated/shenzhen_train3200.npz
 uv run rt-csi disjoint-fewshot --out-dir regenerated/disjoint-fewshot
 uv run rt-csi plot-scenes
+uv run rt-csi plot-results
 ```
 
 `generate --scene all` means the five Mix5 scenes; Shenzhen has separate
