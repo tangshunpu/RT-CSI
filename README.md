@@ -84,7 +84,9 @@ per-scene archives if you need those fields.
 ![Log magnitude of one Munich test channel in angular-delay coordinates.](assets/angular_delay_example.png)
 
 *Example normalized angular-delay channel: Munich test sample 100. The plot
-shows relative magnitude in dB after mapping stored values back around zero.*
+shows relative magnitude in dB after mapping stored values back around zero.
+Both heatmap axes contain 32 bins and use equal visual scale; the colorbar and
+axis labels sit outside the square heatmap.*
 
 ## Use the data
 
