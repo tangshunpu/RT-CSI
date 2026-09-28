@@ -1,0 +1,46 @@
+{
+  "assigned_materials": {
+    "itu_concrete": 560,
+    "itu_metal": 249,
+    "itu_wet_ground": 13,
+    "itu_wood": 13
+  },
+  "extent": {
+    "max_lat": 30.2732,
+    "max_lon": 120.1243,
+    "min_lat": 30.2595,
+    "min_lon": 120.1097
+  },
+  "offset": {
+    "applied_xy_offset": [
+      22.395172119140625,
+      14.826904296875
+    ],
+    "new_bbox_max": [
+      794.1967163085938,
+      798.3536376953125,
+      201.0
+    ],
+    "new_bbox_min": [
+      -749.4063720703125,
+      -768.6998291015625,
+      0.0
+    ],
+    "original_bbox_max": [
+      794.1967163085938,
+      798.3536376953125,
+      201.0
+    ],
+    "original_bbox_min": [
+      -749.4063720703125,
+      -768.6998291015625,
+      0.0
+    ]
+  },
+  "xml_stats": {
+    "material_count": 4,
+    "shape_count": 825
+  },
+  "scene_xml": "ZJU.xml",
+  "source_note": "OSM-derived geometry exported with Blosm; terrain provenance pending verification."
+}

@@ -1,0 +1,10 @@
+# Zhejiang University Yuquan campus.  Yuquan Mountain in the NW; campus
+# in E half.  Restrict auto BS picking to the campus side (x > -200,
+# y > -400) so we don't pick mountain residential towers.
+
+tx_position: null
+oversample: 6.0
+max_radius_from_tx: 300.0
+num_bs: 5
+min_bs_separation_m: 200.0
+bs_pick_bbox: [-200.0, 600.0, -400.0, 500.0]   # [x_min, x_max, y_min, y_max]

@@ -1,0 +1,45 @@
+{
+  "assigned_materials": {
+    "itu_concrete": 282,
+    "itu_metal": 282,
+    "itu_wet_ground": 2
+  },
+  "extent": {
+    "max_lat": 1.345844,
+    "max_lon": 103.967816,
+    "min_lat": 1.33686,
+    "min_lon": 103.95883
+  },
+  "offset": {
+    "applied_xy_offset": [
+      -107.91302490234375,
+      -253.53363037109375
+    ],
+    "new_bbox_max": [
+      560.56201171875,
+      544.8214111328125,
+      98.42707824707031
+    ],
+    "new_bbox_min": [
+      -776.3880615234375,
+      -1051.888671875,
+      0.0
+    ],
+    "original_bbox_max": [
+      560.56201171875,
+      544.8214111328125,
+      98.42707824707031
+    ],
+    "original_bbox_min": [
+      -776.3880615234375,
+      -1051.888671875,
+      0.0
+    ]
+  },
+  "xml_stats": {
+    "material_count": 3,
+    "shape_count": 565
+  },
+  "scene_xml": "SUTD.xml",
+  "source_note": "OSM-derived geometry exported with Blosm; terrain provenance pending verification."
+}

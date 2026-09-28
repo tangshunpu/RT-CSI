@@ -1,0 +1,48 @@
+# Shenzhen Futian CBD - TEST-ONLY realistic 3GPP UMa config:
+#   - 10 BSes @ 25-50 m rooftops (typical 5G macro heights, NOT super-tall)
+#   - max_depth=7 specular + diffraction + diffuse (scattering=0.1)
+#   - all-BS serving (each RX -> up to 10 channel samples, one per BS)
+#   - RX on city street (z = 35 + 1.5 m, rx_outdoor_z_range fix)
+#   - target=40k test samples
+#
+# Output: train/val empty, all 40k samples in x_test.
+
+tx_position: null
+oversample: 6.0
+max_radius_from_tx: 400.0
+
+# CRITICAL fix: city ground in SHENZHEN_with_ground is at z ~= 35 m.
+# Without this range filter the sampler descended to the artificial
+# back-up plane at z = -0.2 and placed RX in the basement.
+rx_outdoor_z_range: [30.0, 50.0]
+
+num_bs: 10                          # 5G macro density (~3 BS/km^2)
+min_bs_separation_m: 200.0          # macro cells well separated
+bs_pick_height_range_m: [25.0, 50.0]   # realistic 5G macro rooftop heights
+bs_mount_above_roof_m: 2.5
+
+# Ray-tracing: deep specular + diffraction + DIFFUSE
+max_depth: 7
+los: true
+specular_reflection: true
+refraction: true
+diffraction: true
+diffuse_reflection: true
+# Diffuse scattering on ITU concrete/metal/wet_ground.  Sionna default is
+# 0 which silently disables diffuse paths even with the flag; we force
+# 0.1 (small, Lambertian) for realistic glass-and-metal CBD scattering.
+scattering_coefficient: 0.1
+scattering_alpha_r: 1.0
+
+# All-BS serving: each RX -> K samples (one per BS), tagged with bs_id.
+serving_mode: "all_bs"
+
+# Dr.Jit cfr budget at K=10 + depth=7 + diffuse:
+#   batch * 10 * 32 * 1024 * paths < 4.3e9 -> paths < 1313 per batch=10.
+#   Diffuse adds ~3-5x paths; estimate max ~400 paths. -> batch=10 OK.
+batch_size: 8
+
+# Test-only.
+target_samples: 40000
+train_ratio: 0.0
+val_ratio: 0.0

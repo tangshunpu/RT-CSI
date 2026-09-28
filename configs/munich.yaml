@@ -1,0 +1,8 @@
+# Munich (Frauenkirche area).  Bbox ~1475 x 1206 m.
+# 5 BSes auto-picked from tallest rooftops, min sep 250 m.
+
+tx_position: null
+oversample: 6.0
+max_radius_from_tx: 300.0
+num_bs: 5
+min_bs_separation_m: 250.0

@@ -1,0 +1,32 @@
+[project]
+name = "rt-csi"
+version = "0.1.0"
+description = "Sionna RT ray-traced CSI feedback dataset generation for Mix5 and held-out Shenzhen."
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "sionna==2.0.1",
+    "sionna-rt==2.0.1",
+    "mitsuba==3.8.0",
+    "drjit==1.3.1",
+    "torch>=2.9.1",
+    "numpy>=2.2.6",
+    "scipy>=1.15",
+    "h5py>=3.15",
+    "matplotlib>=3.10",
+    "tqdm>=4.66",
+    "pyyaml>=6.0",
+    "ipython>=8.20",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project.scripts]
+rt-csi = "rt_csi.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rt_csi"]
+
+[tool.hatch.build.targets.sdist]
+exclude = ["/data", "/dist", "/.venv", "/regenerated"]

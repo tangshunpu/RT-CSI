@@ -1,0 +1,47 @@
+[extent]
+min_lon = 103.958830
+min_lat = 1.336860
+max_lon = 103.967816
+max_lat = 1.345844
+
+[paths]
+data_dir = "../output/SUTD"
+export_filename = "SUTD.xml"
+blend_filename = "SUTD.blend"
+blosm_zip = "../vendor/addons/blosm-release-2.7.26.zip"
+mitsuba_blender_zip = "../vendor/addons/mitsuba-blender-v0.4.0-blender45.zip"
+
+[addons]
+blosm_modules = ["blosm"]
+mitsuba_modules = ["mitsuba-blender", "mitsuba_blender", "mitsuba"]
+
+[import]
+terrain = true
+osm = true
+water = false
+forests = false
+vegetation = false
+highways = false
+railways = false
+single_object = false
+osm_mode = "3Dsimple"
+
+[materials]
+roof = "itu_metal"
+wall = "itu_concrete"
+terrain = "itu_wet_ground"
+road = "itu_concrete"
+default = "itu_concrete"
+
+[postprocess]
+sanitize_names = true
+triangulate = true
+recenter_xy = true
+add_face_normals = true
+cleanup_blosm_cache = false
+
+[view]
+add_camera = true
+camera_position = [0.0, -450.0, 260.0]
+camera_look_at = [0.0, 0.0, 0.0]
+add_sun = true

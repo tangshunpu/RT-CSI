@@ -1,0 +1,53 @@
+# Default configuration for RT_CSI Sionna pipeline.
+# Each scene may override any of these keys in configs/<scene>.yaml.
+
+frequency_hz: 3.5e+9
+bandwidth_hz: 20.0e+6
+num_subcarriers: 1024
+
+bs_rows: 1
+bs_cols: 32
+bs_vertical_spacing: 0.5
+bs_horizontal_spacing: 0.5
+bs_pattern: iso
+bs_polarization: V
+
+ue_rows: 1
+ue_cols: 1
+ue_pattern: iso
+ue_polarization: V
+
+# Auto-placed above scene xy-center unless tx_position is set explicitly.
+tx_position: null
+tx_positions: null         # explicit multi-BS list; takes precedence if set
+num_bs: 5                  # auto-pick K tallest non-overlapping rooftops
+min_bs_separation_m: 250.0
+bs_mount_above_roof_m: 2.5
+bs_pick_bbox: null         # restrict auto BS picking to this xy bbox
+tx_height: 50.0           # m above ground (only used in single-BS auto mode)
+rx_height: 1.5
+grid_step_m: 1.0
+# Constrain RX to a disk around the TX (m). Keeps each scene at a single
+# cell scale (~1 km^2) so multipath delays fit in the 32-tap budget at
+# 20 MHz BW. Set to null to disable.  In multi-BS mode, RX must be within
+# `max_radius_from_tx` of *any* BS (union of disks).
+max_radius_from_tx: 300.0
+
+max_depth: 5
+los: true
+specular_reflection: true
+refraction: true
+diffraction: true
+diffuse_reflection: false
+synthetic_array: true
+seed: 42
+
+target_samples: 40000
+oversample: 5.0           # raised from 1.5 — dense cities have many blocked RX
+# Multi-BS: cfr broadcast scales with num_paths * K * ant * freq.  At
+# batch=200 we stay below the Dr.Jit 2^32-entry limit even when K=5
+# BSes and ~100 paths/RX/BS.
+batch_size: 200
+
+train_ratio: 0.6
+val_ratio: 0.2

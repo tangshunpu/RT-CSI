@@ -1,0 +1,39 @@
+# Shenzhen Futian CBD - TRAIN-mode config for few-shot fine-tuning.
+# Identical physics to SHENZHEN_test (10 BSes @ 25-50m, diffuse on, RX on
+# city street z=37m).  Only differences:
+#   - train_ratio=0.8, val_ratio=0.2  -> samples go into x_train/x_val
+#   - seed=1 (different from test). A different seed alone does not ensure
+#     disjoint UE positions on a finite 1 m grid. Use the release cleaning
+#     script for UE-disjoint few-shot subsets.
+# Use --target-samples and --seed CLI overrides for sweep sizes 200..3200.
+
+tx_position: null
+oversample: 6.0
+max_radius_from_tx: 400.0
+rx_outdoor_z_range: [30.0, 50.0]
+
+num_bs: 10
+min_bs_separation_m: 200.0
+bs_pick_height_range_m: [25.0, 50.0]
+bs_mount_above_roof_m: 2.5
+
+max_depth: 7
+los: true
+specular_reflection: true
+refraction: true
+diffraction: true
+diffuse_reflection: true
+scattering_coefficient: 0.1
+scattering_alpha_r: 1.0
+
+serving_mode: "all_bs"
+batch_size: 8
+
+# Different seed from SHENZHEN_test (seed=42); positions may still overlap.
+seed: 1
+
+# Original link-level 80/20 split. The release also provides an alternate
+# UE-disjoint 80/20 split with test-overlap removal.
+target_samples: 3200
+train_ratio: 0.8
+val_ratio: 0.2

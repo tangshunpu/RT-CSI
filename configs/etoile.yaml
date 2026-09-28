@@ -1,0 +1,8 @@
+# Etoile (Place de l'Etoile, Paris).  Bbox ~854 x 676 m.
+
+tx_position: null
+tx_height: 60.0
+oversample: 5.0
+max_radius_from_tx: 250.0
+num_bs: 5
+min_bs_separation_m: 200.0

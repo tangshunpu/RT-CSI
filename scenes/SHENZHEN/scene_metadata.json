@@ -1,0 +1,46 @@
+{
+  "assigned_materials": {
+    "itu_concrete": 809,
+    "itu_metal": 140,
+    "itu_wet_ground": 2,
+    "itu_wood": 4
+  },
+  "extent": {
+    "max_lat": 22.545,
+    "max_lon": 114.0568,
+    "min_lat": 22.532,
+    "min_lon": 114.043
+  },
+  "offset": {
+    "applied_xy_offset": [
+      38.532867431640625,
+      110.71200561523438
+    ],
+    "new_bbox_max": [
+      809.3927612304688,
+      951.1664428710938,
+      637.0972900390625
+    ],
+    "new_bbox_min": [
+      -732.3270263671875,
+      -729.742431640625,
+      0.0
+    ],
+    "original_bbox_max": [
+      809.3927612304688,
+      951.1664428710938,
+      637.0972900390625
+    ],
+    "original_bbox_min": [
+      -732.3270263671875,
+      -729.742431640625,
+      0.0
+    ]
+  },
+  "xml_stats": {
+    "material_count": 4,
+    "shape_count": 952
+  },
+  "scene_xml": "SHENZHEN_SKYLINE_with_ground.xml",
+  "source_note": "OSM-derived geometry exported with Blosm; terrain provenance pending verification."
+}

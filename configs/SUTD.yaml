@@ -1,0 +1,11 @@
+# Singapore University of Technology & Design.  Restrict to the campus
+# (roughly x > -200, y > 50) so the auto-picker doesn't choose Singapore
+# Expo or NW residential towers.
+
+tx_position: null
+oversample: 5.0
+max_radius_from_tx: 300.0
+num_bs: 5
+min_bs_separation_m: 150.0
+bs_pick_bbox: [-200.0, 600.0, 50.0, 600.0]
+batch_size: 80        # K=5, ~270 paths/RX SUTD -> small batch
