@@ -54,24 +54,26 @@ def main(argv: list[str] | None = None) -> None:
     args = parser.parse_args(argv)
     results = read_results(args.csv)
 
-    fig, axes = plt.subplots(3, 1, figsize=(12.0, 11.2), sharey=True)
+    fig, axes = plt.subplots(3, 1, figsize=(12.0, 11.2))
     fig.patch.set_facecolor("white")
     fig.suptitle("Sionna-RT-Mix5 NMSE by scene and compression ratio",
                  fontsize=17, y=0.995)
     fig.text(0.5, 0.966,
-             "Bar height = −NMSE (dB); taller is better. Dark outline marks the best result in each scene.",
+             "Bar height = −NMSE (dB); taller is better. Panel scales vary; dark outline marks the best result.",
              ha="center", va="top", fontsize=10.5, color="#3B4651")
 
     x = np.arange(len(SCENES))
     width = 0.13
     offset = (len(METHODS) - 1) * width / 2
     for ax, (ratio_label, ratio_key) in zip(axes, RATIOS):
+        panel_max = 0.0
         best = {
             scene: min(METHODS, key=lambda method: results[method[0]][f"{scene}_{ratio_key}"])[0]
             for _, scene in SCENES
         }
         for method_index, (name, _, color) in enumerate(METHODS):
             heights = [-results[name][f"{scene}_{ratio_key}"] for _, scene in SCENES]
+            panel_max = max(panel_max, *heights)
             edgecolors = ["#18212B" if best[scene] == name else "white"
                           for _, scene in SCENES]
             linewidths = [1.4 if best[scene] == name else 0.5
@@ -82,8 +84,9 @@ def main(argv: list[str] | None = None) -> None:
         ax.set_title(f"Compression ratio η = {ratio_label}", loc="left",
                      fontsize=12, fontweight="semibold", pad=8)
         ax.set_xticks(x, [label for label, _ in SCENES], fontsize=11)
-        ax.set_ylim(0, 27)
-        ax.set_yticks((0, 5, 10, 15, 20, 25))
+        y_limit = int(np.ceil(panel_max + 1))
+        ax.set_ylim(0, y_limit)
+        ax.set_yticks(np.arange(0, y_limit + 1, 5))
         ax.set_ylabel("−NMSE (dB)", fontsize=10.5)
         ax.grid(axis="y", color="#DDE2E7", linewidth=0.7, zorder=0)
         ax.set_axisbelow(True)

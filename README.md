@@ -95,7 +95,8 @@ absolute received power across scenes. Regenerate the figure with
 The manuscript reports the following per-scene test NMSE after training each
 method on the five-scene Mix5 training set. The bars show **−NMSE**, so a taller
 bar corresponds to a lower (better) NMSE in dB. A dark outline marks the best
-method for each scene and compression ratio.
+method for each scene and compression ratio. Every panel starts at zero but
+uses its own y-axis maximum; read the tick marks when comparing ratios.
 
 ![Grouped bar chart of six methods across five Mix5 scenes at compression ratios 1/4, 1/8, and 1/16.](assets/mix5_nmse_bars.png)
 
