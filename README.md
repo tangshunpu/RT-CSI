@@ -81,12 +81,14 @@ The combined Mix5 `scene_id` order is **Étoile, ZJU, SUTD, Florence,
 Munich**. Its archive omits `bs_id_*` and `bs_positions`; use the five
 per-scene archives if you need those fields.
 
-![Log magnitude of one Munich test channel in angular-delay coordinates.](assets/angular_delay_example.png)
+![Angular-delay CSI examples from Munich, Paris Étoile, Florence, ZJU, SUTD, and Shenzhen.](assets/angular_delay_six_scenes.png)
 
-*Example normalized angular-delay channel: Munich test sample 100. The plot
-shows relative magnitude in dB after mapping stored values back around zero.
-Both heatmap axes contain 32 bins and use equal visual scale; the colorbar and
-axis labels sit outside the square heatmap.*
+*One normalized angular-delay test channel from each scene (sample index 100).
+All six 32 × 32 heatmaps use the same dB range and equal axis scale. White
+indicates the lowest plotted magnitude; darker blue indicates stronger paths.
+The dB values are relative to each sample's own peak, so colors do not compare
+absolute received power across scenes. Regenerate the figure with
+`uv run rt-csi plot-scenes`.*
 
 ## Use the data
 
@@ -122,7 +124,7 @@ counts are smaller than the nominal number in the filename; results from
 these files require fresh evaluation. Details are in
 [`docs/release-audit.md`](docs/release-audit.md).
 
-## Generate or inspect channels
+## Generate, inspect, or plot channels
 
 The dataset is ready to read without Sionna. To run the generator, install
 the pinned Python dependencies and use the single `rt-csi` command:
@@ -136,6 +138,7 @@ uv run rt-csi combine --scene-dir regenerated --out regenerated/mix5.npz
 uv run rt-csi generate --scene SHENZHEN_test --out regenerated/shenzhen_test.npz
 uv run rt-csi generate --scene SHENZHEN_train --target-samples 3200 --out regenerated/shenzhen_train3200.npz
 uv run rt-csi disjoint-fewshot --out-dir regenerated/disjoint-fewshot
+uv run rt-csi plot-scenes
 ```
 
 `generate --scene all` means the five Mix5 scenes; Shenzhen has separate

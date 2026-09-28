@@ -11,6 +11,7 @@ COMMANDS = {
     "combine": "combine",
     "inspect": "inspect",
     "disjoint-fewshot": "fewshot",
+    "plot-scenes": "plot_scenes",
 }
 
 
@@ -23,7 +24,8 @@ def main() -> None:
               "  generate          Ray-trace one scene or all Mix5 scenes\n"
               "  combine           Build the Mix5 NPZ from five scene files\n"
               "  inspect           Show NPZ arrays and metadata\n"
-              "  disjoint-fewshot  Create UE-disjoint Shenzhen adaptation sets\n\n"
+              "  disjoint-fewshot  Create UE-disjoint Shenzhen adaptation sets\n"
+              "  plot-scenes       Plot CSI examples from all six scenes\n\n"
               "Run 'rt-csi <command> --help' for command options.")
         return
     command = argv[0]
