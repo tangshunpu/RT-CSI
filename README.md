@@ -24,7 +24,7 @@ OpenStreetMap data; see [attribution](#license-and-attribution).*
 | ZJU | OSM/Blosm campus; Mix5 | 5 | 300 m | 24,000 | 8,000 | 8,000 |
 | SUTD | OSM/Blosm campus; Mix5 | 5 | 300 m | 24,000 | 8,000 | 8,000 |
 | **Mix5 combined** | Concatenation of the five rows above | — | — | **120,000** | **40,000** | **40,000** |
-| **Shenzhen Futian CBD** | OSM/Blosm; held-out test | 10 | 400 m | — | — | **40,000** |
+| **Shenzhen Futian CBD** | OSM/Blosm; held-out test with separate few-shot adaptation sets | 10 | 400 m | See below | See below | **40,000** |
 
 Each count is a **channel sample**. Mix5 keeps one serving-BS link per UE.
 Shenzhen stores every valid UE-BS link, so one UE position can appear in
@@ -33,6 +33,29 @@ convenience copy of the five scene files; it adds no new channels.
 
 The filenames say `3GHz` for historical compatibility. The actual carrier
 frequency is **3.5 GHz**, as recorded in each file's `config` metadata.
+
+### Shenzhen few-shot training sets
+
+The training sets **are included** in [`data/`](data/). Each `trainN` filename
+uses `N` for the total train-plus-validation **UE-BS link** budget, split
+80/20 in the original files; it does not mean `x_train` alone has `N` rows.
+
+| Nominal links | Original `x_train` / `x_val` | UE-disjoint alternative `x_train` / `x_val` |
+|---:|---:|---:|
+| [200](data/csi_SHENZHEN_train200_3GHz_32x1024.npz) | 160 / 40 | [155 / 39](data/csi_SHENZHEN_train200_3GHz_32x1024_disjoint.npz) |
+| [400](data/csi_SHENZHEN_train400_3GHz_32x1024.npz) | 320 / 80 | [313 / 78](data/csi_SHENZHEN_train400_3GHz_32x1024_disjoint.npz) |
+| [800](data/csi_SHENZHEN_train800_3GHz_32x1024.npz) | 640 / 160 | [626 / 155](data/csi_SHENZHEN_train800_3GHz_32x1024_disjoint.npz) |
+| [1,600](data/csi_SHENZHEN_train1600_3GHz_32x1024.npz) | 1,280 / 320 | [1,245 / 313](data/csi_SHENZHEN_train1600_3GHz_32x1024_disjoint.npz) |
+| [3,200](data/csi_SHENZHEN_train3200_3GHz_32x1024.npz) | 2,560 / 640 | [2,496 / 625](data/csi_SHENZHEN_train3200_3GHz_32x1024_disjoint.npz) |
+| [6,400](data/csi_SHENZHEN_train6400_3GHz_32x1024.npz) | 5,120 / 1,280 | [5,004 / 1,252](data/csi_SHENZHEN_train6400_3GHz_32x1024_disjoint.npz) |
+| [12,800](data/csi_SHENZHEN_train12800_3GHz_32x1024.npz) | 10,240 / 2,560 | [10,016 / 2,504](data/csi_SHENZHEN_train12800_3GHz_32x1024_disjoint.npz) |
+
+The original files preserve the paper-experiment splits. The `_disjoint`
+alternatives remove links whose UE location appears in the fixed test set and
+split train/validation by UE location; their smaller counts require fresh
+evaluation. All these training archives have an empty `x_test`. The fixed
+40,000-link test set is the separate
+[`csi_SHENZHEN_test_3GHz_32x1024.npz`](data/csi_SHENZHEN_test_3GHz_32x1024.npz).
 
 ### Channel and propagation settings
 
@@ -129,15 +152,18 @@ the five scene files' `x_test` separately. Zero-shot and fine-tuned Shenzhen
 evaluation use **all 40,000** rows of
 `data/csi_SHENZHEN_test_3GHz_32x1024.npz`.
 
-The original few-shot archives are named
-`csi_SHENZHEN_train{200,400,800,1600,3200,6400,12800}_3GHz_32x1024.npz`.
-They contain an 80/20 train/validation split and preserve the exact inputs
-used in the paper experiments. Files with `_disjoint.npz` suffix are a
-separate corrected alternative: UE positions shared with the fixed test are
-removed, and train/validation are split by UE position. Their actual sample
-counts are smaller than the nominal number in the filename; results from
-these files require fresh evaluation. Details are in
+For Shenzhen adaptation, load `x_train` and `x_val` from one of the linked
+few-shot archives above, then load `x_test` from the separate fixed test
+archive. Details on the original and corrected splits are in
 [`docs/release-audit.md`](docs/release-audit.md).
+
+```python
+with np.load("data/csi_SHENZHEN_train3200_3GHz_32x1024.npz", allow_pickle=False) as adaptation, \
+     np.load("data/csi_SHENZHEN_test_3GHz_32x1024.npz", allow_pickle=False) as held_out:
+    x_train = adaptation["x_train"]  # (2560, 2, 32, 32)
+    x_val = adaptation["x_val"]      # (640, 2, 32, 32)
+    x_test = held_out["x_test"]      # (40000, 2, 32, 32)
+```
 
 ## Generate, inspect, or plot channels
 
