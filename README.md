@@ -197,6 +197,22 @@ RT-CSI-release/
 The data directory is about 3 GB. `.gitattributes` marks NPZ files for Git
 LFS; install Git LFS before adding the data to a Git repository.
 
+## Citation
+
+If you use RT-CSI, please cite:
+
+```bibtex
+@article{tang2026rankone,
+  title         = {Model-Driven Deep Learning with Rank-One Sensing for Efficient CSI Feedback},
+  author        = {Tang, S. and Yang, Q. and Ko, S. W. and Park, J. and Huang, K.},
+  journal       = {arXiv preprint arXiv:2610.11558},
+  year          = {2026},
+  eprint        = {2610.11558},
+  archivePrefix = {arXiv},
+  url           = {https://arxiv.org/abs/2610.11558}
+}
+```
+
 ## License and attribution
 
 Original code is MIT licensed; generated CSI NPZ files are CC BY 4.0. The
